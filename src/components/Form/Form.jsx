@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { nanoid } from 'nanoid';
 import Input from '../Input';
-import PhoneInput from 'react-phone-number-input';
-import 'react-phone-number-input/style.css';
+// import PhoneInput from 'react-phone-number-input';
+// import 'react-phone-number-input/style.css';
 
 class Form extends Component {
   state = {
@@ -48,7 +48,7 @@ class Form extends Component {
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           placeholder="Enter please name"
         />
-        <PhoneInput
+        {/* <PhoneInput
           defaultCountry="UA"
           onChange={number => this.setState({ number })}
           region="Europe"
@@ -61,7 +61,7 @@ class Form extends Component {
           international
           className="inputPhone"
           maxLength="16"
-        />
+        /> */}
         <BtnSubmit onSubmit={this.handleSubmit}>Add contact</BtnSubmit>
       </FormContainer>
     );

@@ -5,7 +5,9 @@ import List from './ContactsList';
 import Filter from './Filter';
 import styled from 'styled-components';
 
-class App extends Component {
+// export default App;
+
+export class App extends Component {
   state = {
     contacts: [],
     filter: '',
@@ -70,6 +72,6 @@ class App extends Component {
   }
 }
 
-export default App;
+
 
 const Title = styled.h1``;
