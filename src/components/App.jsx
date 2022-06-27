@@ -4,33 +4,58 @@ import Phonebook from './Phonebook/Phonebook';
 import Contacts from './Phonebook/Contacts/Contacts';
 import Filter from './Phonebook/Filter/Filter';
 
-export class App extends Component {
+// export class App extends Component {
+//   state = {
+//     contacts: [
+//       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+//       { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+//       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+//       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+//     ],
+//     filter: '',
+//   };
+
+//   addContact = ({ name, number }) => {
+//     const noUniqueName = this.state.contacts
+//       .map(e => e.name.toLowerCase())
+//       .includes(name.toLowerCase());
+//     if (noUniqueName) {
+//       return alert(`${name} is already in contacts`);
+//     }
+//     const contact = {
+      
+//       name: name,
+//       number: number,
+//     };
+//     this.setState(prevState => ({
+//       contacts: [...prevState.contacts, contact],
+//     }));
+//   };
+class App extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: [],
     filter: '',
   };
 
-  addContact = ({ name, number }) => {
-    const noUniqueName = this.state.contacts
-      .map(e => e.name.toLowerCase())
-      .includes(name.toLowerCase());
-    if (noUniqueName) {
-      return alert(`${name} is already in contacts`);
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const parseContacts = JSON.parse(contacts);
+
+    if (parseContacts) {
+      this.setState({
+        contacts: parseContacts,
+      });
     }
-    const contact = {
-      
-      name: name,
-      number: number,
-    };
-    this.setState(prevState => ({
-      contacts: [...prevState.contacts, contact],
-    }));
-  };
+  }
+
+  componentDidUpdate(prevState) {
+    const contacts = this.state.contacts;
+    const prevStateContacts = prevState.contacts;
+
+    if (contacts !== prevStateContacts) {
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+    }
+  }
 
   changeFilter = e => {
     this.setState({ filter: e.currentTarget.value });
